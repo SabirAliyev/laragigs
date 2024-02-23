@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Listing;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,21 +32,17 @@ use Illuminate\Support\Facades\Route;
 //     return $request->name . ' ' . $request->city;
 // });
 
-
+// All Listings
 Route::get('/', function () {
     return view('listings', [
         'heading' => 'Latest Listings',
-        'listings' => [
-            [
-                'id' => 1,
-                'title' => 'First Listing',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, modi.',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Second Listing',
-                'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, modi.',
-            ]
-        ],
+        'listings' => Listing::all()
+    ]);
+});
+
+// Single Listing
+Route::get('/listings/{id}', function ($id) {
+    return view('listing', [
+        'listing' => Listing::find($id)
     ]);
 });
