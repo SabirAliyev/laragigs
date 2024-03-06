@@ -15,23 +15,6 @@ use App\Models\Listing;
 |
 */
 
-// Route::get('/hello', function () {
-//     return response('<h1>Hello World</h1>');
-// });
-
-// Route::get('/posts/{id}', function ($id) {
-//     ddd($id);
-//     return response('Post ' . $id);
-// })->where('id', '[0-9]+');
-
-// Route::get('/search', function (Request $request) {
-//     dd($request);
-// });
-
-// Route::get('/search', function (Request $request) {
-//     return $request->name . ' ' . $request->city;
-// });
-
 // All Listings
 Route::get('/', function () {
     return view('listings', [
@@ -40,9 +23,22 @@ Route::get('/', function () {
     ]);
 });
 
-// Single Listing
-Route::get('/listings/{id}', function ($id) {
+// Single Listing (Using Route Model Binding - old style)
+// Route::get('/listings/{id}', function ($id) {
+//     $listing = Listing::find($id);
+
+//     if ($listing) {
+//         return view('listing', [
+//             'listing' => Listing::find($id)
+//         ]);
+//     } else {
+//         abort(404);
+//     }
+// });
+
+// Single Listing (Using Route Model Binding - new style)
+Route::get('/listings/{listing}', function (Listing $listing) {
     return view('listing', [
-        'listing' => Listing::find($id)
+        'listing' => $listing
     ]);
 });
