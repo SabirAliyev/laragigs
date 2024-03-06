@@ -1,3 +1,5 @@
+<?php
+
 // Return an array of fake users data
 return [
     [
